@@ -198,27 +198,44 @@
       }
       
       work() { 
-        let survivors = []
-         for (let i = 0; i < this.ants.length; i++) {
-           //console.log(this.ants[i].health, this.ants[i].name)
-           this.ants[i].health -= 20
-           //console.log(this.ants[i].health, 'after')
-           if (this.ants[i].health > 0) {
-            survivors.push(this.ants[i])
-           }
-         }
-        this.ants = survivors
-        // this.ants = this.ants.filter(ant => {
-        //   ant.health -= 20
-        //   if (ant.health > 0) {
-        //     return ant
-        //   }
-        // })
+        
+        if (this.ants.length === 0) {
+            return "No ants here. Did you work them to death?";
+        }
+ 
+        let message = `${this.ants.length} ants starting work!`;
+ 
+        for (let i = this.ants.length - 1; i >= 0; i--) {
+            this.ants[i].health -= 20;
+ 
+            if (this.ants[i].health <= 0) {
+                this.ants.splice(i, 1);
+            }
+        }
+ 
+        return message;
+    }
+        //let survivors = []
+        //  for (let i = 0; i < this.ants.length; i++) {
+        //    //console.log(this.ants[i].health, this.ants[i].name)
+        //    this.ants[i].health -= 20
+        //    //console.log(this.ants[i].health, 'after')
+        //    if (this.ants[i].health > 0) {
+        //     survivors.push(this.ants[i])
+        //    }
+        //  }
+        // this.ants = survivors
+        // // this.ants = this.ants.filter(ant => {
+        // //   ant.health -= 20
+        // //   if (ant.health > 0) {
+        // //     return ant
+        // //   }
+        // // })
         
         // this.ants.forEach(ant => {ant.health -= 20})
          //this.ants = this.ants.filter(ant => ant.health > 0);
-         return `${this.ants.length} ants starting work!`
-        }
+        //  return `${this.ants.length} ants starting work!`
+        // }
        
 
        feed(names){
